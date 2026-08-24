@@ -57,10 +57,19 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
+            # 校验 Docker Hub secrets 是否已配置，避免出现不明错误
+            - name: Validate Docker Hub secrets
+              run: |
+                if [ -z "${{ secrets.DOCKER_USERNAME }}" ] || [ -z "${{ secrets.DOCKER_PASSWORD }}" ]; then
+                  echo "ERROR: DOCKER_USERNAME or DOCKER_PASSWORD is not set. Add them under Repository settings → Secrets and variables → Actions."
+                  exit 1
+                fi
+
             # 登录 Docker Hub
             - name: Log in to Docker Hub
               uses: docker/login-action@v3
               with:
+                registry: docker.io
                 username: ${{ secrets.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
             # 提取 docker 元数据（自动生成标签，比如：latest 和 git-sha）
