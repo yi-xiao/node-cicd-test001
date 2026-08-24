@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
     console.log('Hello from CI/CD pipeline!');
 });
 
+app.get('/k8s-test', (req, res) => {
+    res.send('Test for k8s deployment!');
+    console.log('Test for k8s deployment!');
+});
 
 // start the server
 app.listen(port, () => {
