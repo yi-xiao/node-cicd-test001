@@ -28,7 +28,7 @@ spec:
               memory: "128Mi"
               cpu: "100m"
           # 就绪探针：判断 Pod 是否准备好接收流量
-          readreadinessProbe:
+          readinessProbe:
             httpGet:
               path: /health
               port: 3000

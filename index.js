@@ -23,7 +23,7 @@ app.get('/crash', (req, res) => {
   console.log('💥 Crash endpoint triggered! Blocking event loop...');
   const start = Date.now();
   // 同步阻塞 15 秒（模拟死循环）
-  while (Date.now() - start < 15000) {
+  while (Date.now() - start < 50000) {
     // 什么都不做，只是占用 CPU
   }
   res.send('Recovered from crash! (This should not be reachable under normal probe config)');
