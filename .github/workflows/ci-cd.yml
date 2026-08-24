@@ -90,8 +90,8 @@ jobs:
                 push: true
                 tags: ${{ steps.meta.outputs.tags }}
                 labels: ${{ steps.meta.outputs.labels }}
-                cache-from: type=gha
-                cache-to: type=gha,mode=max
+                # cache-from: type=gha
+                # cache-to: type=gha,mode=max
 
             # 模拟部署步骤（可选）, 打印出镜像标签
             - name: Output image tags
