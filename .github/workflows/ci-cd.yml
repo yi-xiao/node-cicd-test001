@@ -97,7 +97,8 @@ jobs:
             - name: Output image tags
               run: |
                 echo "Docker image build successful."
-                echo ${{ steps.meta.outputs.tags }}
+                # 用双引号包起来，避免标签中包含单引号
+                echo "${{ steps.meta.outputs.tags }}"
 
             # （拓展）真正部署到 k8s （先注释掉）
             # - name: Deploy to Kubernetes
