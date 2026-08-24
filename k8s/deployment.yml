@@ -27,9 +27,19 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "100m"
-            # livenessProbe:
-            #   httpGet:
-            #     path: /
-            #     port: 3000
-            #   initialDelaySeconds: 10
-            #   periodSeconds: 10
+          # 就绪探针：判断 Pod 是否准备好接收流量
+          readreadinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5 # 延迟 5 秒启动检查
+            periodSeconds: 5 # 每隔 5 秒检查一次
+            timeoutSeconds: 3 # 连续失败次数超过 3 次，则认为 Pod 不健康，需要重启
+          # 存活探针：判断 Pod 是否还活着（是否需要重启）
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 3
